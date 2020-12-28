@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import './App.css';
+import axios from 'axios';
 import './Middlebar';
 import googlelogo from './assets/googlelogo.png'
 import facebooklogo from './assets/facebooklogo.png'
@@ -13,14 +14,14 @@ function App() {
   const googleloginfunc=()=>{
    
     app.auth().signInWithPopup(googleprovider).then(function(result) {
-      console.log(result.user)
-      console.log(result.user.displayName)
-      console.log(result.user.email)
-      console.log(result.user.photoURL)
       setusername(result.user.displayName)
       setuseremail(result.user.email)
       setuserphoto(result.user.photoURL)
       setisuserloggenin(true)
+      axios.get(axios.get("http://localhost:8001/createuser/"+result.user.email).then(res=>
+      console.log(res.data)
+    ))
+
     }).catch(function(error) {
      console.log(error)
     });
@@ -37,7 +38,7 @@ function App() {
     }).catch(function(error) {
      console.log("Error")
       console.log(error)
-      if(error.code=="auth/account-exists-with-different-credential"){
+      if(error.code==="auth/account-exists-with-different-credential"){
         alert("User with same email ID exists")
       }
       
