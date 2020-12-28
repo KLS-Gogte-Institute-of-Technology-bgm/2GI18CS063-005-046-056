@@ -6,8 +6,8 @@ import facebooklogo from './assets/facebooklogo.png'
 import app,{googleprovider,facebookprovider} from './firebase1.js'
 import Middlebar from './Middlebar';
 function App() {
-  const [isuserloggenin, setisuserloggenin]=useState(false)
-  const[useremaid,setuseremail]=useState('')
+  const [isuserloggenin, setisuserloggenin]=useState(false);
+  const[useremail,setuseremail]=useState('')
   const[username,setusername]=useState('')
   const[userphoto,setuserphoto]=useState('')
   const googleloginfunc=()=>{
@@ -18,6 +18,7 @@ function App() {
       console.log(result.user.email)
       console.log(result.user.photoURL)
       setusername(result.user.displayName)
+      setuseremail(result.user.email)
       setuserphoto(result.user.photoURL)
       setisuserloggenin(true)
     }).catch(function(error) {
@@ -31,7 +32,7 @@ function App() {
       setusername(result.user.displayName)
       setuseremail(result.user.email)
       setuserphoto(result.user.photoURL)
-    console.log(result.user.displayName)
+    console.log(result.user.email)
     
     }).catch(function(error) {
      console.log("Error")
@@ -60,7 +61,7 @@ function App() {
         <img className="header_image" src={userphoto}/>
         <button className="header_button" onClick={usersignout}>Logout</button>
       </div>
-      <Middlebar/>
+      <Middlebar useremail={useremail}/>
       </div>
       :
 

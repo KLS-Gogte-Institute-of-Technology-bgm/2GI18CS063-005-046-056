@@ -6,10 +6,12 @@
   }
   .search_bar{
     width: 70%;
-    height: 100px;
+    
+  }
+  .form_division{
     display: flex;
     align-items: center;
-    text-align: center;
+    height: 100px;
   }
   .form_input{
     margin-left: 10vw;
@@ -24,9 +26,10 @@
     border: black;
     margin-left: 10px;
     height: 30px;
-    width: 75px;
+    width: 50px;
     border-radius: 100px;
     outline: none;
+    text-align: center;
   }
  
   .words_search{
