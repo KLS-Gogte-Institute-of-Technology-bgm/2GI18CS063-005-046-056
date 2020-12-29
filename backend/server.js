@@ -1,6 +1,7 @@
 const axios=require('axios');
+require("dotenv").config()
 var MongoClient=require('mongodb').MongoClient;
-const mongodburl="mongodb+srv://kaps_dictionary_user1:Pj1G8DTRzp26tzri@cluster0.3uorz.mongodb.net/Users?retryWrites=true&w=majority"
+const mongodburl="mongodb+srv://kaps_dictionary_user1:"+process.env.MONGODB_PASSWORD+"@cluster0.3uorz.mongodb.net/Users?retryWrites=true&w=majority"
 
 const Cors=require('cors');
 const { response, request } = require('express');
@@ -8,7 +9,11 @@ const express= require('express');
 const app=express();
 const port= process.env.PORT || 8001
 app.use(Cors())
-app.get('/',(req,res)=>res.status(200).send('Hello Kapil'));
+app.get('/',(req,res)=>{
+  console.log("The password is "+process.env.MONGODB_PASSWORD)
+  res.send(process.env.MONGODB_PASSWORD)
+
+});
 
 
 /*=================================================================================
@@ -98,6 +103,7 @@ app.get("/createuser/:useremail",(req,res)=>{
             res.send(req.params.useremail+" User already in database")
         }
       });
+      db.close();
     });
 });
 /*=====================================================================================
